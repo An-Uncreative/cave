@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Experience — Oluwatise Erinle</title>
+    <meta
+      name="description"
+      content="Oluwatise Erinle's experience: backend at Octo5 Holdings, teaching at Practicode Academy, and UI/UX design at NexusData Intelligence."
+    />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caveat:wght@500;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="container nav-inner">
+        <a class="brand" href="index.html">Oluwatise Erinle</a>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+          <span class="sr-only">Menu</span><span></span><span></span>
+        </button>
+        <nav class="nav-menu" id="nav-menu">
+          <a href="garage.html">Garage</a>
+          <a href="experience.html" aria-current="page">Experience</a>
+          <a href="https://drive.google.com/file/d/1xlZ7vo-EEz8daLhDxuY8uoAJtaOCXFpA/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-head">
+        <div class="container">
+          <h1>Where I've <span class="mark">been</span>.</h1>
+          <p class="hand page-note">IT support &rarr; design &rarr; teaching &rarr; backend</p>
+        </div>
+      </section>
+
+      <section class="section section-flush">
+        <div class="container">
+          <div class="job reveal">
+            <div class="job-head">
+              <div>
+                <h2>Backend Developer</h2>
+                <div class="muted">Octo5 Holdings, working on Propkeys</div>
+              </div>
+              <div class="hand job-date">Jun 2026 – now</div>
+            </div>
+            <p>
+              At Octo5 Holdings, I work on the backend of Propkeys, a property rental and booking platform. My work spans property management, billing and pricing logic, booking workflows, and the systems that support the platform behind the scenes. From refining how property charges are calculated to building admin authentication, access controls, and audit logging, I spend a lot of time making the platform's logic more reliable.
+            </p>
+            <ul class="notes">
+              <li>
+                Built admin password reset and email two-factor sign-in, then spent a good while making it hard to break: OTP codes that expire, attempt limits that can't be raced past, and old sessions logged out after a password reset.
+              </li>
+              <li>
+                Built the admin settings system: email provider (SMTP, SES or SendGrid), booking rules and feature flags, all changeable without a redeploy, with role-based access control (RBAC) on every action.
+              </li>
+              <li>
+                Built the admin audit log: every admin action is recorded with
+                who did it, what they changed, and the before and after.
+                <code>AsyncLocalStorage</code> carries the request context
+                through nested services, so each request leaves one clean record.
+              </li>
+              <li>
+                Refactored the property billing and pricing logic: monthly and
+                quarterly billing, short and long stays, solo and shared
+                residency, and caution fees. Made validation and pricing behave
+                the same whether a landlord or an admin is managing the property.
+              </li>
+              <li>Fixed currency conversion and pagination inconsistencies, built admin search, and documented the REST APIs in Swagger/OpenAPI.</li>
+              <li>Diagnosed and resolved intermittent production email-delivery failures affecting admin authentication and password recovery. Reworked email provider lifecycle management to reuse Nodemailer SMTP connection pools, and introduced worker-result confirmation, bounded retries, and failure logging through BullMQ.</li>
+            </ul>
+            <p class="tools mono">TypeScript · Node.js · Express · MongoDB · Redis · BullMQ · Vitest</p>
+          </div>
+
+          <div class="bugs-head reveal">
+            <h2 class="scribble">Bugs I enjoyed fixing</h2>
+          </div>
+          <div class="bugs reveal-child">
+            <div class="index-card bug bug-wide">
+              <h3 class="hand">the one that took the longest</h3>
+              <div class="bug-wide-body">
+                <div>
+                  <p><span class="pen-red">bug:</span> Admin sign-in and password-reset codes sometimes failed to arrive in production. The app still reported them as sent, leaving admins locked out without any indication of what went wrong.</p>
+                  <p><span class="pen-blue">digging:</span> Every email created a new SMTP connection, and the sending process was fire-and-forget. Nothing confirmed delivery before the request reported success. Under concurrent sign-in attempts, some emails silently failed, with no useful error logs.</p>
+                </div>
+                <div>
+                  <p><span class="pen-green">fix:</span> Enabled Nodemailer's connection pooling and reused cached email providers. Made time-sensitive admin emails wait for the BullMQ worker's delivery result, with bounded retries. Rolled back issued OTPs and tokens when delivery failed, and added worker-level failure logging.</p>
+                  <p><span class="pen-blue">since:</span> Several days of sustained production use without a recurrence of the delivery failures.</p>
+                </div>
+              </div>
+            </div>
+            <div class="index-card bug">
+              <p><span class="pen-red">bug:</span> Changing the email provider in admin settings had no effect. The long-running worker picked a provider once at startup and never checked again.</p>
+              <p><span class="pen-green">fix:</span> Made the email service look the provider up on every send.</p>
+            </div>
+            <div class="index-card bug">
+              <p><span class="pen-red">bug:</span> Send enough wrong sign-in codes concurrently and you could bypass the account lockout. Each request was working with a potentially outdated attempt count.</p>
+              <p><span class="pen-green">fix:</span> Moved attempt counting and lockout enforcement into an atomic MongoDB update.</p>
+            </div>
+            <div class="index-card bug">
+              <p><span class="pen-red">bug:</span> Enabling 2FA failed for admins with older profiles containing missing fields. Mongoose's full-document validation was blocking an otherwise valid update.</p>
+              <p><span class="pen-green">fix:</span> Updated only the required OTP fields without re-validating the entire document.</p>
+            </div>
+            <div class="index-card bug">
+              <p><span class="pen-red">bug:</span> Concurrent settings saves could create duplicate platform settings documents instead of updating the existing one.</p>
+              <p><span class="pen-green">fix:</span> Used a fixed document ID so every settings write targets the same record.</p>
+            </div>
+            <div class="index-card bug">
+              <p><span class="pen-red">bug:</span> Resetting an admin's password left previously issued authentication tokens valid. Changing the password didn't invalidate existing sessions.</p>
+              <p><span class="pen-green">fix:</span> Added token invalidation to the password-reset flow.</p>
+            </div>
+            <div class="index-card bug">
+              <p><span class="pen-red">bug:</span> Some property forms sent naira amounts into fields expecting kobo. A ₦100,000 rent could end up stored as 100,000 kobo instead of 10,000,000.</p>
+              <p><span class="pen-green">fix:</span> Corrected naira-to-kobo conversion across property creation and update flows.</p>
+            </div>
+          </div>
+
+          <div class="before reveal">
+            <h2 class="scribble">Before that</h2>
+            <ol class="timeline">
+              <li>
+                <div class="hand timeline-date">Apr – Oct 2025</div>
+                <h3>Full-Stack Developer &amp; UI/UX Design Instructor</h3>
+                <div class="muted">Practicode Academy</div>
+                <p>
+                  Kept the academy's learning platform running for the trainees on
+                  it, front to back. Also taught full-stack development and UI/UX
+                  design.
+                </p>
+              </li>
+              <li>
+                <div class="hand timeline-date">Oct 2023 – Dec 2024</div>
+                <h3>Design Lead, UI/UX</h3>
+                <div class="muted">NexusData Intelligence, remote</div>
+                <p>
+                  Led design on the company's digital products, worked side by side
+                  with the developers shipping them, and ran usability reviews.
+                </p>
+              </li>
+              <li>
+                <div class="hand timeline-date">Apr 2023 – May 2024</div>
+                <h3>IT Support &amp; Web Operations Trainee</h3>
+                <div class="muted">ICPD, FUNAAB</div>
+                <p>Support tickets, system setup and keeping the website running.</p>
+              </li>
+            </ol>
+          </div>
+
+          <div class="extras">
+            <div class="index-card reveal">
+              <h3 class="hand">tools I reach for</h3>
+              <p>
+                Node.js, Express and TypeScript most days. MongoDB and Redis, plus
+                PostgreSQL and MySQL when the job calls for SQL. BullMQ for
+                background jobs, Vitest for tests, Swagger for docs, AWS EC2 for
+                hosting.
+              </p>
+              <p>On the front end: React and Figma. I can also find my way around Python, C, Go, Java and PHP.</p>
+            </div>
+            <div class="index-card reveal">
+              <h3 class="hand">school &amp; certificates</h3>
+              <ul>
+                <li>B.Sc. Computer Science, Federal University of Agriculture, Abeokuta (2025)</li>
+                <li>Software Engineering, ALX Africa (2024)</li>
+                <li>Google IT Support Professional Certificate (2023)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <h2>Say hi.</h2>
+        <p class="muted">Email is the best way to reach me.</p>
+        <a class="footer-email mark" href="mailto:oluwatiseerinle@gmail.com">oluwatiseerinle@gmail.com</a>
+        <div class="footer-links">
+          <a href="https://github.com/An-Uncreative" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/oluwatise-erinle-111442245" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://drive.google.com/file/d/1xlZ7vo-EEz8daLhDxuY8uoAJtaOCXFpA/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+        </div>
+        <p class="footer-base">© <span class="year"></span> Oluwatise Erinle</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

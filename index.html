@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Oluwatise Erinle — Backend Developer</title>
+    <meta
+      name="description"
+      content="Oluwatise Erinle, backend developer and former UI/UX designer."
+    />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caveat:wght@500;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="container nav-inner">
+        <a class="brand" href="index.html">Oluwatise Erinle</a>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+          <span class="sr-only">Menu</span><span></span><span></span>
+        </button>
+        <nav class="nav-menu" id="nav-menu">
+          <a href="garage.html">Garage</a>
+          <a href="experience.html">Experience</a>
+          <a href="https://drive.google.com/file/d/1xlZ7vo-EEz8daLhDxuY8uoAJtaOCXFpA/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="hello hand">hi, I'm Oluwatise</p>
+            <h1>I build the parts of software you <span class="mark">don't see</span>.</h1>
+            <p class="lead">
+              I'm a software engineer. Right now, I am working with Node.js, TypeScript and Express at Octo5 Holdings, where I build and maintain APIs for Propkeys, a property rental and booking platform.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="garage.html">Step into the garage</a>
+              <a class="btn" href="#about">About me</a>
+            </div>
+          </div>
+
+          <div class="hero-visual" id="hero-visual">
+            <canvas id="hero-canvas" aria-hidden="true"></canvas>
+            <div class="hero-fallback">
+              <img class="taped" src="assets/img/lagos-bites.png" alt="Lagos Bites ordering app" />
+              <img class="taped" src="assets/img/tracker.png" alt="Funds Accountability Tracker app" />
+            </div>
+            <div class="hero-note hand" aria-hidden="true">
+              some stuffs, click one!
+              <svg viewBox="0 0 80 60" class="arrow">
+                <path d="M70 6 C 55 10, 30 18, 14 46" />
+                <path d="M8 34 L 14 47 L 27 42" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="tape-strip" aria-label="Tech I use">
+        <div class="stack-track">
+          <span>TypeScript</span><span>Node.js</span><span>Express</span><span>MongoDB</span
+          ><span>PostgreSQL</span><span>Redis</span><span>BullMQ</span><span>React</span
+          ><span>Paystack</span><span>Swagger</span><span>Vitest</span><span>AWS</span
+          ><span>Figma</span>
+        </div>
+      </div>
+
+      <!-- About -->
+      <section class="section about-section" id="about">
+        <div class="container about-grid">
+          <div class="about-copy reveal">
+            <h2 class="scribble">A bit about me</h2>
+            <div class="prose">
+              <p>
+                I studied Computer Science at FUNAAB, and my first few years in
+                tech were IT support and then design. I led UI/UX at NexusData
+                Intelligence, then taught design and full-stack development at
+                Practicode Academy.
+              </p>
+              <figure class="polaroid p-selfie">
+                <img src="assets/img/selfie.jpg" alt="Oluwatise grinning up at the camera, pulling a peace sign" loading="lazy" />
+                <figcaption class="hand">A good time</figcaption>
+              </figure>
+              <p>
+                Somewhere in there I noticed the part I liked most was the part
+                nobody looks at. Whether a payment is real. Who's allowed to change
+                what. What happens when two requests land at the same time. So
+                that's what I do now.
+              </p>
+              <p>Outside of code, I'm a bit of a cinephile, and a gamer. I also enjoy riding powerbikes, especially when there's a little speed involved.</p>
+            </div>
+
+            <div class="scatter">
+              <figure class="polaroid p-road">
+                <img src="assets/img/roadside.jpg" alt="Oluwatise in a red sweater and blue cap, hands over his face, on an empty road" loading="lazy" />
+                <figcaption class="hand">Somedays, I am a model... </figcaption>
+              </figure>
+              <figure class="polaroid p-crew">
+                <img src="assets/img/crew.jpg" alt="Black and white selfie of Oluwatise and his brother pulling faces" loading="lazy" />
+                <figcaption class="hand">my brother and I.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="about-side">
+            <figure class="photo taped reveal">
+              <span class="bike-note hand">isn't Adesubomi beautiful? <small>(the bike)</small></span>
+              <svg class="bike-arrows" viewBox="0 0 400 540" aria-hidden="true">
+                <g>
+                  <path d="M65 66 Q-20 240 46 250" />
+                  <path d="M35 242 L46 250 L33 255" />
+                </g>
+                <g>
+                  <path d="M30 520 Q22 440 50 420" />
+                  <path d="M36 422 L50 420 L44 433" />
+                </g>
+                <g>
+                  <path d="M290 66 Q420 240 354 250" />
+                  <path d="M367 255 L354 250 L365 242" />
+                </g>
+                <g>
+                  <path d="M372 522 Q386 432 352 420" />
+                  <path d="M361 430 L352 420 L366 418" />
+                </g>
+              </svg>
+              <img
+                src="assets/img/me.jpg"
+                alt="Oluwatise Erinle sitting on a Honda CBR motorbike"
+                onerror="this.parentElement.classList.add('no-photo')"
+              />
+              <span class="photo-empty hand">your photo here</span>
+              <figcaption class="hand">me, thinking of doing my first wheelie</figcaption>
+            </figure>
+
+            <div class="index-card facts reveal">
+              <h3 class="hand">quick facts</h3>
+              <ul>
+                <li>Adrenaline junkie</li>
+                <li>B.Sc. Computer Science, FUNAAB '25</li>
+                <li>Backend at Octo5 Holdings</li>
+                <li>On GitHub as An-Uncreative</li>
+              </ul>
+            </div>
+
+            <div class="sticky reveal">
+              <strong>off the clock</strong>
+              <p>Riding, Gaming, Learning new things, Connecting with people</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-flush">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2 class="scribble">Things I've made</h2>
+            <a class="hand side-note" href="garage.html">the full stories are in the garage &rarr;</a>
+          </div>
+          <div class="previews reveal-child">
+            <a class="preview" href="garage.html#lagos-bites">
+              <div class="taped shot">
+                <img src="assets/img/lagos-bites.png" alt="Lagos Bites menu and cart" loading="lazy" />
+              </div>
+              <h3>Lagos Bites</h3>
+              <p>Online ordering for restaurants, with Paystack payments the browser can't fake.</p>
+            </a>
+            <a class="preview" href="garage.html#tracker">
+              <div class="taped shot">
+                <img src="assets/img/tracker.png" alt="Funds Accountability Tracker" loading="lazy" />
+              </div>
+              <h3>Funds Accountability Tracker</h3>
+              <p>A solo hackathon build for keeping shared money honest.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tight">
+        <div class="container">
+          <a class="sticky sticky-now reveal" href="experience.html">
+            <strong>right now</strong>
+            <p>
+              Currently making Propkeys at Octo5 Holdings a little more reliable, by squashing one bug at a time. More on that &rarr;
+            </p>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <h2>Say hi.</h2>
+        <p class="muted">Email is the best way to reach me.</p>
+        <a class="footer-email mark" href="mailto:oluwatiseerinle@gmail.com">oluwatiseerinle@gmail.com</a>
+        <div class="footer-links">
+          <a href="https://github.com/An-Uncreative" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/oluwatise-erinle-111442245" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://drive.google.com/file/d/1xlZ7vo-EEz8daLhDxuY8uoAJtaOCXFpA/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+        </div>
+        <p class="footer-base">© <span class="year"></span> Oluwatise Erinle</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        }
+      }
+    </script>
+    <script type="module" src="assets/js/hero.js"></script>
+  </body>
+</html>
